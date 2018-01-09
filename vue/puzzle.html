@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<style>
+			/*.box{width: 180px;height: 180px;background: pink;}*/
+			.puzzle-wrap{width: 180px;height: 180px;border: 1px solid #DDD;}
+			.puzzle-wrap li{width: 40px;height: 40px;background: orange;}
+			ul li{list-style: none;float: left;margin: 2px;text-align: center;line-height: 40px;}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<div class="box">
+				<ul class="puzzle-wrap">
+					<li :class="{'pz':true,'pz-empty':!pz}" v-for="pz in pzs" v-text="pz"></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	new Vue({
+		el:"#demo",
+//		export default{
+		 data () {
+		    return {
+		      pzs: []
+		    }
+		 },
+		methods:{
+			render(){
+				let pzArr=[],i=1;
+				for(i;i<16;i++){
+					pzArr.push(i);
+				}
+				console.log(pzArr);
+				pzArr=pzArr.sort(()=>{return Math.random()-0.5});
+				this.pzs=pzArr;
+				this.pzs.push('');
+			},
+			ready(){
+				this.render()
+			}
+		}
+//	}
+	})
+	
+</script>

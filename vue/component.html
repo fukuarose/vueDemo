@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+	<body>
+		<!--<div id="demo">
+			<my-component>
+				
+			</my-component>
+		</div>-->
+		<div id="app">
+			<p>{{total}}</p>
+			<button-counter v-on:increment="incrementTotal"></button-counter>
+			<button-counter v-on:increment="incrementTotal"></button-counter>
+		</div>
+	</body>
+</html>
+<script>
+//	Vue.component('my-component',{
+//		template:'<div>A custom component!</div>'
+//	})
+//	new Vue({
+//		el:"#demo",
+//		data:{
+//			
+//		}
+//	})
+Vue.component("button-counter",{
+	template:'<button v-on:click="incrementCounter">{{counter}}</button>',
+	data:function(){
+		return{
+			counter:0
+		}
+	},
+	methods:{
+		incrementCounter:function(){
+			this.counter+=1;
+			this.$emit('increment')
+		}
+	}
+})
+new Vue({
+	el:'#app',
+	data:{
+		total:0
+	},
+	methods:{
+		incrementTotal:function(){
+			this.total+=1
+		}
+	}
+})
+</script>

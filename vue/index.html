@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+		<style>
+			/*.expand-transition {
+			  transition: all .3s ease;
+			  height: 30px;
+			  padding: 10px;
+			  background-color: #eee;
+			  overflow: hidden;
+			}
+			.expand-enter, .expand-leave {
+			  height: 0;
+			  padding: 0 10px;
+			  opacity: 0;
+			}*/
+			/*.fade-enter-active,.fade-leave-active{
+				transition: opacity .5s;
+			}
+			.fade-enter,.fade-leave-to{
+				opacity: 0;
+			}*/
+			/*.slide-fade-enter-active{
+				transition: all 0.3s ease;
+			}
+			.slide-fade-leave-active{
+				transition: all 0.8s cubic-bezier(1.0 0.5 0.8 1.0);
+			}
+			.slide-fade-enter,.slide-fade-leave-to{
+				transform: translateX(100px);
+				opacity: 0;
+			}*/
+			
+			/*.bounce-enter-active {
+				animation: bounce-in .5s;
+			}
+			
+			.bounce-leave-active {
+				animation: bounce-in .5s reverse;
+			}
+			
+			@keyframes bounce-in {
+				0% {
+					transform: scale(0);
+				}
+				50% {
+					transform: scale(1.5);
+				}
+				100% {
+					transform: scale(1);
+				}
+			}*/
+			.component-fade-enter-active, .component-fade-leave-active {
+			  transition: opacity .3s ease;
+			}
+			.component-fade-enter, .component-fade-leave-to
+			/* .component-fade-leave-active for below version 2.1.8 */ {
+			  opacity: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="demo">
+			<!--<div v-if="show" v-transition="expand">hello</div>-->
+			<button @click="show=!show">toggle</button>
+			<!--<transition name="fade">
+				<p v-if="show">hello</p>
+			</transition>-->
+			<!--<transition name="slide-fade">
+				<p v-if="show">hello</p>
+			</transition>-->
+			<!--<transition name="bounce">
+				<p v-if="show">333333333333333333333333</p>
+			</transition>-->
+			<!--<transition name="custom-classes-transition" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+				<p v-if="show">hello</p>
+			</transition>-->
+			<!--<transition
+			    v-on:before-enter="beforeEnter"
+			    v-on:enter="enter"
+			    v-on:leave="leave"
+			    v-bind:css="false">
+			    <p v-if="show">
+			      Demo
+			    </p>
+			</transition>-->
+			<input type="radio" @click="view='v-a'"  value="A"/>
+			<input type="radio" @click="view='v-b'"  value="B"/>
+			<transition name="component-fade" mode="out-in">
+				<component v-bind:is="view"></component>
+			</transition>
+		</div>
+	</body>
+
+</html>
+<script>
+	//	var vm=new Vue({
+	//		el:"#demo",
+	//		data:{
+	//			show:true
+	//		}
+	//	})
+//	new Vue({
+//		el: '#demo',
+//		data: {
+//			show: false
+//		},
+//		methods: {
+//			beforeEnter: function(el) {
+//				el.style.opacity = 0
+//				el.style.transformOrigin = 'left'
+//			},
+//			enter: function(el, done) {
+//				Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 })
+//				Velocity(el, { fontSize: '1em' }, { complete: done })
+//			},
+//			leave: function(el, done) {
+//				Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+//				Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+//				Velocity(el, {
+//					rotateZ: '45deg',
+//					translateY: '30px',
+//					translateX: '30px',
+//					opacity: 0
+//				}, { complete: done })
+//			}
+//		}
+//	})
+	new Vue({
+		el:"#demo",
+		data:{
+			view:"v-a"
+		},
+		components:{
+			'v-a':{
+				template:'<div>Component A</div>'
+			},
+			'v-b':{
+				template:'<div>Component B</div>'
+			}
+		}
+	})
+</script>
